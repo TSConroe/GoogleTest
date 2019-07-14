@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+
+<suite name="Google search tests">
+
+    <parameter name="keyWord" value="automation"/>
+    <parameter name="domainToVerify" value="testautomationday.com"/>
+    <test name="firstTest">
+        <classes>
+            <class name="ui.GoogleSearch"/>
+        </classes>
+    </test>
+
+
+</suite>
