@@ -10,6 +10,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,15 +19,18 @@ import static core.Driver.closeThreadLocalDriver;
 import static org.jsoup.helper.Validate.fail;
 
 public abstract class BaseUi {
+    private static final Logger logger = LoggerFactory.getLogger(BaseUi.class);
     public static final String BROWSER = "chrome";
     public static final String BROWSER_VERSION = System.getenv("browserVersion");
-        public static WebDriver driver;
-//    public WebDriver driver = DriverConstructor.getInstance().getDriver();
- static{
+    public static WebDriver driver;
+
+    //    public WebDriver driver = DriverConstructor.getInstance().getDriver();
+    static {
         if (BROWSER.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
             Driver.setThreadLocalDriver(driver);
+
         } else if (BROWSER.equals("firefox")) {
             WebDriverManager.firefoxdriver().version(BROWSER_VERSION).setup();
             driver = new FirefoxDriver();
@@ -38,7 +43,7 @@ public abstract class BaseUi {
         } else {
             fail("Incorrect browser. Please check browser name");
         }
-
+        logger.info("Starting browser");
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
