@@ -3,14 +3,14 @@
 
 <suite name="Google search tests">
     <listeners>
-        <listener class-name="base.utils.listeners.ExtentReports.TestListener"></listener>
+        <listener class-name="base.utils.listeners.TestListener"></listener>
     </listeners>
 
     <parameter name="keyWord" value="automation"/>
     <parameter name="domainToVerify" value="testautomationday.com"/>
     <test name="firstTest">
         <classes>
-            <class name="ui.GoogleSearch"/>
+            <class name="googleTest.GoogleSearch"/>
         </classes>
     </test>
 

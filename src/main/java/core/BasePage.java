@@ -60,9 +60,9 @@ public abstract class BasePage {
         return Driver.getThreadLocalDriver();
     }
 
-    public void waitFor(ExpectedCondition<WebElement> condition) {
-        waitFor(condition, null);
-    }
+//    public void waitFor(ExpectedCondition<WebElement> condition) {
+//        waitFor(condition, null);
+//    }
 
     public void waitFor(ExpectedCondition<WebElement> condition, Integer timeOutInSeconds) {
         int temp = timeOutInSeconds != null ? timeOutInSeconds : 30;

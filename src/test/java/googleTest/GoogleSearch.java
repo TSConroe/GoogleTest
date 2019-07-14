@@ -1,4 +1,4 @@
-package ui;
+package googleTest;
 
 import base.pages.MainPage;
 import base.pages.ResultPage;
