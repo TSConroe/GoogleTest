@@ -3,19 +3,18 @@ package ui;
 import base.pages.MainPage;
 import base.pages.ResultPage;
 import com.sun.org.glassfish.gmbal.Description;
-import core.BaseUi;
 import org.testng.annotations.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static base.Utils.getDomainName;
+import static base.utils.Utils.getDomainName;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 import static org.testng.Assert.fail;
 
-public class GoogleSearch extends BaseUi {
+public class GoogleSearch extends MainPage {
     private MainPage mainPage;
     private ResultPage resultPage;
 

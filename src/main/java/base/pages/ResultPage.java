@@ -1,13 +1,13 @@
 package base.pages;
 
-import core.BaseUi;
+import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ResultPage extends BaseUi {
+public class ResultPage extends BasePage {
     private By searchResults = By.cssSelector(".srg .g h3");
     private By nexButton = By.cssSelector("#pnnext");
     private By searchResultsDomain = By.cssSelector(".r > a:first-child");

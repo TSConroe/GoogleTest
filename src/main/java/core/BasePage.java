@@ -2,10 +2,10 @@ package core;
 
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -18,32 +18,30 @@ import java.util.concurrent.TimeUnit;
 import static core.Driver.closeThreadLocalDriver;
 import static org.jsoup.helper.Validate.fail;
 
-public abstract class BaseUi {
-    private static final Logger logger = LoggerFactory.getLogger(BaseUi.class);
-    public static final String BROWSER = "chrome";
-    public static final String BROWSER_VERSION = System.getenv("browserVersion");
-    public static WebDriver driver;
+public abstract class BasePage {
+    private static final Logger logger = LoggerFactory.getLogger(BasePage.class);
+    private static final String BROWSER = System.getenv("BROWSER");
+    private static final int height = Integer.parseInt(System.getenv("height"));
+    private static final int width = Integer.parseInt(System.getenv("width"));
+    protected static WebDriver driver;
+    private static Dimension resolution = new Dimension(width, height);
 
-    //    public WebDriver driver = DriverConstructor.getInstance().getDriver();
     static {
         if (BROWSER.equals("chrome")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
-            Driver.setThreadLocalDriver(driver);
-
         } else if (BROWSER.equals("firefox")) {
-            WebDriverManager.firefoxdriver().version(BROWSER_VERSION).setup();
+            WebDriverManager.firefoxdriver().setup();
             driver = new FirefoxDriver();
         } else if (BROWSER.equals("ie")) {
-            WebDriverManager.iedriver().version(BROWSER_VERSION).setup();
+            WebDriverManager.iedriver().setup();
             driver = new InternetExplorerDriver();
-        } else if (BROWSER.equals("edge")) {
-            WebDriverManager.iedriver().version(BROWSER_VERSION).setup();
-            driver = new EdgeDriver();
         } else {
             fail("Incorrect browser. Please check browser name");
         }
         logger.info("Starting browser");
+        Driver.setThreadLocalDriver(driver);
+        driver.manage().window().setSize(resolution);
         driver.manage().deleteAllCookies();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
