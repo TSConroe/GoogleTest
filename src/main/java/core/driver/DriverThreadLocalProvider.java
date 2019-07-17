@@ -29,7 +29,7 @@ public class DriverThreadLocalProvider {
     }};
 
 
-    public DriverThreadLocalProvider() {
+    private DriverThreadLocalProvider() {
         if (ThreadLocalDriver.getDriver() == null) {
             if (!webDriverMap.containsKey(Constants.BROWSER)) {
                 fail(String.format("Incorrect browser '%s' . Please check browser name", Constants.BROWSER));

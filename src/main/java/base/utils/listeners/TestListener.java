@@ -19,14 +19,13 @@ public class TestListener implements ITestListener {
 
     //Text attachments for Allure
     @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] saveScreenshotPNG(WebDriver driver) {
-        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+    private void saveScreenshotPNG(WebDriver driver) {
+        ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     //Text attachments for Allure
     @Attachment(value = "{0}", type = "text/plain")
-    public static String saveTextLog(String message) {
-        return message;
+    private static void saveTextLog(String message) {
     }
 
     //HTML attachments for Allure

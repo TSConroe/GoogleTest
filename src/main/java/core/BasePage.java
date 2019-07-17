@@ -13,7 +13,7 @@ public abstract class BasePage {
         this.driver = DriverThreadLocalProvider.getInstance().getDriver();
     }
 
-    public void goToPage(String url) {
+    protected void goToPage(String url) {
         driver.get(url);
     }
 }

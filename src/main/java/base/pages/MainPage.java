@@ -8,9 +8,8 @@ import static base.utils.Constants.DOMAIN;
 public class MainPage extends BasePage {
     private By searchField = By.name("q");
 
-    public MainPage load() {
+    public void load() {
         goToPage("http://" + DOMAIN);
-        return this;
     }
 
     public MainPage inputSearchText(String text) {

@@ -2,11 +2,11 @@ package base.utils.listeners;
 
 import com.relevantcodes.extentreports.ExtentReports;
 
-public class ExtentManager {
+class ExtentManager {
 
     private static ExtentReports extent;
 
-    public synchronized static ExtentReports getReporter() {
+    synchronized static ExtentReports getReporter() {
         if (extent == null) {
             //Set HTML reporting file location
             String workingDir = System.getProperty("user.dir");

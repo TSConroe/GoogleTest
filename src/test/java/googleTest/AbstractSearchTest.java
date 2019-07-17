@@ -9,9 +9,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 public abstract class AbstractSearchTest {
-    protected MainPage mainPage;
-    protected ResultPage resultPage;
-    protected WebDriver driver;
+    MainPage mainPage;
+    ResultPage resultPage;
+    WebDriver driver;
 
     @AfterClass()
     public void afterFirst() {
