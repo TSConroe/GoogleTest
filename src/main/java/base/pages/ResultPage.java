@@ -12,18 +12,8 @@ public class ResultPage extends BasePage {
     private By nexButton = By.cssSelector("#pnnext");
     private By searchResultsDomain = By.cssSelector(".r > a:first-child");
 
-//    public ResultPage() {
-////        driver = super.getDriver();
-//
-//    }
-
-    public List<String> getSearchingResults() {
-        //only from the first page
-        return getSearchingResults(0);
-    }
-
     public List<String> getSearchingResults(int pageCount) {
-        List<String> result = new ArrayList<String>();
+        List<String> result = new ArrayList<>();
         for (int i = 0; i < pageCount; i++) {
             List<WebElement> domains = driver.findElements(searchResultsDomain);
             for (WebElement domain : domains) {

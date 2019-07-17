@@ -2,7 +2,7 @@ package base.utils.listeners;
 
 
 import com.relevantcodes.extentreports.LogStatus;
-import core.BasePage;
+import core.driver.DriverThreadLocalProvider;
 import io.qameta.allure.Attachment;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -19,13 +19,13 @@ public class TestListener implements ITestListener {
 
     //Text attachments for Allure
     @Attachment(value = "Page screenshot", type = "image/png")
-    public byte[] saveScreenshotPNG (WebDriver driver) {
-        return ((TakesScreenshot)driver).getScreenshotAs(OutputType.BYTES);
+    public byte[] saveScreenshotPNG(WebDriver driver) {
+        return ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
     }
 
     //Text attachments for Allure
     @Attachment(value = "{0}", type = "text/plain")
-    public static String saveTextLog (String message) {
+    public static String saveTextLog(String message) {
         return message;
     }
 
@@ -43,7 +43,7 @@ public class TestListener implements ITestListener {
     @Override
     public void onTestStart(ITestResult iTestResult) {
         //Start operation for extentreports.
-        ExtentTestManager.startTest(iTestResult.getMethod().getMethodName(),"");
+        ExtentTestManager.startTest(iTestResult.getMethod().getMethodName(), "");
     }
 
     @Override
@@ -54,9 +54,7 @@ public class TestListener implements ITestListener {
 
     @Override
     public void onTestFailure(ITestResult iTestResult) {
-        //Get driver from BaseTest and assign to local webdriver variable.
-        Object testClass = iTestResult.getInstance();
-        WebDriver driver = ((BasePage) testClass).getDriver();
+        WebDriver driver = DriverThreadLocalProvider.getInstance().getDriver();
 
         //Allure ScreenShotRobot and SaveTestLog
         if (driver instanceof WebDriver) {
@@ -68,17 +66,17 @@ public class TestListener implements ITestListener {
         saveTextLog(getTestMethodName(iTestResult) + " failed and screenshot taken!");
 
         //Take base64Screenshot screenshot for extent reports
-        String base64Screenshot = "data:image/png;base64,"+((TakesScreenshot)driver).
+        String base64Screenshot = "data:image/png;base64," + ((TakesScreenshot) driver).
                 getScreenshotAs(OutputType.BASE64);
 
         //Extentreports log and screenshot operations for failed tests.
-        ExtentTestManager.getTest().log(LogStatus.FAIL,"Test Failed",
+        ExtentTestManager.getTest().log(LogStatus.FAIL, "Test Failed",
                 ExtentTestManager.getTest().addBase64ScreenShot(base64Screenshot));
     }
 
     @Override
     public void onTestSkipped(ITestResult iTestResult) {
-        System.out.println("I am in onTestSkipped method "+  getTestMethodName(iTestResult) + " skipped");
+        System.out.println("I am in onTestSkipped method " + getTestMethodName(iTestResult) + " skipped");
         ExtentTestManager.getTest().log(LogStatus.SKIP, "Test Skipped");
     }
 
