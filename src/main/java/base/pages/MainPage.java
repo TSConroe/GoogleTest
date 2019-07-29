@@ -1,6 +1,5 @@
 package base.pages;
 
-import core.BasePage;
 import org.openqa.selenium.By;
 
 import static base.utils.Constants.DOMAIN;
@@ -18,8 +17,10 @@ public class MainPage extends BasePage {
         return this;
     }
 
-    public MainPage submitSearch() {
+    public ResultPage submitSearch() {
         driver.findElement(searchField).submit();
-        return this;
+        return new ResultPage();
     }
+
+
 }

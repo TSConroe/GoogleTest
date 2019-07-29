@@ -56,7 +56,7 @@ public class TestListener implements ITestListener {
         WebDriver driver = DriverThreadLocalProvider.getInstance().getDriver();
 
         //Allure ScreenShotRobot and SaveTestLog
-        if (driver instanceof WebDriver) {
+        if (driver != null) {
             System.out.println("Screenshot captured for test case:" + getTestMethodName(iTestResult));
             saveScreenshotPNG(driver);
         }

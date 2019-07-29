@@ -8,6 +8,8 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
+import static base.utils.Constants.DOMAIN;
+
 public abstract class AbstractSearchTest {
     MainPage mainPage;
     ResultPage resultPage;
@@ -19,7 +21,7 @@ public abstract class AbstractSearchTest {
     }
 
     @BeforeClass()
-    public void beforeFirst() {
+    public void beforeClass() {
         driver = DriverThreadLocalProvider.getInstance().getDriver();
         mainPage = new MainPage();
         resultPage = new ResultPage();
@@ -28,7 +30,7 @@ public abstract class AbstractSearchTest {
 
     @AfterMethod()
     public void afterTest() {
-        if (driver.getTitle().equals("Google")) {
+        if (driver.getTitle().toLowerCase().contains(DOMAIN.split("\\.")[0])) {
             mainPage.load();
         }
     }

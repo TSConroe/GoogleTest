@@ -1,6 +1,6 @@
 package googleTest;
 
-import com.sun.org.glassfish.gmbal.Description;
+import io.qameta.allure.Description;
 import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static base.utils.Utils.getDomainName;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsCollectionContaining.hasItems;
 
@@ -23,9 +22,7 @@ public class Title extends AbstractSearchTest {
                 .submitSearch();
 
         List<String> urls = resultPage.getSearchingResults(5);
-        for (String url : urls) {
-            domains.add(getDomainName(url));
-        }
+        resultPage.getDomainNameFromUrl(urls);
         assertThat("Title open page by key word " + keyWord + " not contain it in title", domains, hasItems(domainToVerify));
     }
 

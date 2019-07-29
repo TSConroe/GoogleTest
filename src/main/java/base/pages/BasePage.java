@@ -1,4 +1,4 @@
-package core;
+package base.pages;
 
 
 import core.driver.DriverThreadLocalProvider;
@@ -9,7 +9,7 @@ public abstract class BasePage {
 
     protected WebDriver driver;
 
-    protected BasePage() {
+    public BasePage() {
         this.driver = DriverThreadLocalProvider.getInstance().getDriver();
     }
 

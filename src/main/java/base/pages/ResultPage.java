@@ -1,11 +1,12 @@
 package base.pages;
 
-import core.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static base.utils.Utils.getDomainName;
 
 public class ResultPage extends BasePage {
     private By searchResults = By.cssSelector(".srg .g h3");
@@ -27,15 +28,26 @@ public class ResultPage extends BasePage {
         return result;
     }
 
-    public void openFirstResultLink() {
+    public ResultPage openFirstResultLink() {
         openResultLink(0);
+        return this;
     }
 
-    private void openResultLink(int index) {
+    private ResultPage openResultLink(int index) {
         driver.findElements(searchResults).get(index).click();
+        return this;
     }
 
-    private void clickNextPage() {
+    private ResultPage clickNextPage() {
         driver.findElement(nexButton).click();
+        return this;
+    }
+
+    public List<String> getDomainNameFromUrl(List<String> urls) {
+        List<String> domains = new ArrayList<>();
+        for (String url : urls) {
+            domains.add(getDomainName(url));
+        }
+        return domains;
     }
 }
